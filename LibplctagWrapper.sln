@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibplctagWrapper", "LibplctagWrapper\LibplctagWrapper.csproj", "{394ABFC2-E570-462E-9994-37B33C348702}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlcLoop", "SlcLoop\SlcLoop.csproj", "{FCC8F7BD-DD2F-4863-B51A-DE66FD5EE52D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LgxSimple", "LgxSimple\LgxSimple.csproj", "{3D3D02D9-0D60-499E-92F0-BA6666484786}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slc500Strings", "Slc500Strings\Slc500Strings.csproj", "{4E0E1B9D-98F6-44C9-8967-09ECD909D806}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{3D3D02D9-0D60-499E-92F0-BA6666484786}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D3D02D9-0D60-499E-92F0-BA6666484786}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D3D02D9-0D60-499E-92F0-BA6666484786}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E0E1B9D-98F6-44C9-8967-09ECD909D806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0E1B9D-98F6-44C9-8967-09ECD909D806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0E1B9D-98F6-44C9-8967-09ECD909D806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0E1B9D-98F6-44C9-8967-09ECD909D806}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F54C9439-FB32-4347-91C7-98204A245E2C}
 	EndGlobalSection
 EndGlobal

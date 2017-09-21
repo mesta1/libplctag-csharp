@@ -50,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LibplctagSharp\LibplctagSharp.csproj">
-      <Project>{c862a1e8-e230-4440-a013-10e58519e571}</Project>
-      <Name>LibplctagSharp</Name>
+    <ProjectReference Include="..\LibplctagWrapper\LibplctagWrapper.csproj">
+      <Project>{394abfc2-e570-462e-9994-37b33c348702}</Project>
+      <Name>LibplctagWrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
