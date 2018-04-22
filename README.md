@@ -4,6 +4,6 @@ Contains the libplctag wrapper, the dll and some examples on how to communicate 
 
 Get Libplctag at https://github.com/kyle-github/libplctag
 
-License: Libplctag is released under LGPL
+License: This code is released under MIT license. The Libplctag dll is released under LGPL license.
 
 Documentation: https://www.mesta-automation.com/how-to-communicate-to-an-allen-bradley-plc-with-c-and-libplctag-ethernet-ip-library/
