@@ -46,8 +46,16 @@ namespace LibplctagWrapper
 
         public int ReadTag(Tag tag, int timeout)
         {
+#if true
             var result = plc_tag_read(_tags[tag.UniqueKey], timeout);
             return result;
+#else
+            if (_tags.Count != 0)
+            {
+                return plc_tag_read(_tags[tag.UniqueKey], timeout);
+            }
+            return Libplctag.PLCTAG_ERR_NOT_FOUND;
+#endif
         }
 
         public int WriteTag(Tag tag, int timeout)
@@ -146,7 +154,15 @@ namespace LibplctagWrapper
 
         public byte GetUint8Value(Tag tag, int offset)
         {
+#if true
             return plc_tag_get_uint8(_tags[tag.UniqueKey], offset);
+#else
+            if (_tags.Count != 0)
+            {
+                return plc_tag_get_uint8(_tags[tag.UniqueKey], offset);
+            }
+            return 0;
+#endif
         }
 
         public void SetUint8Value(Tag tag, int offset, byte value)
