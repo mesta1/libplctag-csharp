@@ -21,7 +21,7 @@ namespace LgxSimple
             const CpuType PLC_TYPE = CpuType.LGX;
 
             var TAG_CONTROL_WORD = new Tag(PLC_IP, PLC_PATH, PLC_TYPE, "CONTROL_WORD", DataType.Int32, 1);
-            var TAG_SHEET_LENGTH = new Tag(PLC_IP, PLC_PATH, PLC_TYPE, "SHEET_LENGTH", DataType.Float32, 1);
+            var TAG_SHELL_LENGTH = new Tag(PLC_IP, PLC_PATH, PLC_TYPE, "SHELL_LENGTH", DataType.Float32, 1);
             var TAG_STATUS_WORD = new Tag(PLC_IP, PLC_PATH, PLC_TYPE, "STATUS_WORD", DataType.DINT, 1);
             var TAG_PC_HEARTBEAT = new Tag(PLC_IP, PLC_PATH, PLC_TYPE, "PC_HEARTBEAT", DataType.Int8, 1);
             var TAG_MOVE_HOME = new Tag(PLC_IP, PLC_PATH, PLC_TYPE, "MOVE_HOME", DataType.SINT, 1);
@@ -29,7 +29,7 @@ namespace LgxSimple
 
             var tags = new List<Tag> {
                 TAG_CONTROL_WORD,
-                TAG_SHEET_LENGTH,
+                TAG_SHELL_LENGTH,
                 TAG_STATUS_WORD,
                 TAG_PC_HEARTBEAT,
                 TAG_MOVE_HOME,
@@ -72,8 +72,8 @@ namespace LgxSimple
             /* print out the data */
             Console.WriteLine("\n\n{{{{{{{{{{{{{{{{{{{{{\n");
 
-            Console.WriteLine($"initial 'TAG_CONTROL_WORD' = { client.GetUint32Value(TAG_CONTROL_WORD, 0)}\n");
-            Console.WriteLine($"initial 'SHEET_LENGTH' = { client.GetFloat32Value(TAG_SHEET_LENGTH, 0)}\n");
+            Console.WriteLine($"initial 'CONTROL_WORD' = { client.GetUint32Value(TAG_CONTROL_WORD, 0)}\n");
+            Console.WriteLine($"initial 'SHELL_LENGTH' = { client.GetFloat32Value(TAG_SHELL_LENGTH, 0)}\n");
             Console.WriteLine($"initial 'STATUS_WORD' = { client.GetUint32Value(TAG_STATUS_WORD, 0)}\n");
             Console.WriteLine($"initial 'PC_HEARTBEAT' = { client.GetUint8Value(TAG_PC_HEARTBEAT, 0)}\n");
             Console.WriteLine($"initial 'MOVE_HOME' = { client.GetBitValue(TAG_MOVE_HOME, -1, DataTimeout)}\n");
@@ -90,14 +90,14 @@ namespace LgxSimple
                 controlVal = 1;
             else
                 controlVal = controlVal * 2;
-            Console.WriteLine($"setting 'TAG_CONTROL_WORD' = {controlVal}\n");
+            Console.WriteLine($"setting 'CONTROL_WORD' = {controlVal}\n");
             client.SetUint32Value(TAG_CONTROL_WORD, 0, controlVal);
 
-            /* TAG_SHEET_LENGTH */
-            float shellLenVal = client.GetFloat32Value(TAG_SHEET_LENGTH, 0);
+            /* TAG_SHELL_LENGTH */
+            float shellLenVal = client.GetFloat32Value(TAG_SHELL_LENGTH, 0);
             shellLenVal = shellLenVal + (float)0.25;
-            Console.WriteLine($"setting 'SHEET_LENGTH' = {shellLenVal}\n");
-            client.SetFloat32Value(TAG_SHEET_LENGTH, 0, shellLenVal);
+            Console.WriteLine($"setting 'SHELL_LENGTH' = {shellLenVal}\n");
+            client.SetFloat32Value(TAG_SHELL_LENGTH, 0, shellLenVal);
 
             /* TAG_STATUS_WORD */
             var statusVal = client.GetUint32Value(TAG_STATUS_WORD, 0);
@@ -176,8 +176,8 @@ namespace LgxSimple
             }
 
             /* print out the data */
-            Console.WriteLine($"latest 'TAG_CONTROL_WORD' = { client.GetUint32Value(TAG_CONTROL_WORD, 0) }\n");
-            Console.WriteLine($"latest 'SHEET_LENGTH' = { client.GetFloat32Value(TAG_SHEET_LENGTH, 0) }\n");
+            Console.WriteLine($"latest 'CONTROL_WORD' = { client.GetUint32Value(TAG_CONTROL_WORD, 0) }\n");
+            Console.WriteLine($"latest 'SHELL_LENGTH' = { client.GetFloat32Value(TAG_SHELL_LENGTH, 0) }\n");
             Console.WriteLine($"latest 'STATUS_WORD' = { client.GetUint32Value(TAG_STATUS_WORD, 0) }\n");
             Console.WriteLine($"latest 'PC_HEARTBEAT' = { client.GetUint8Value(TAG_PC_HEARTBEAT, 0) }\n");
             Console.WriteLine($"latest 'MOVE_HOME' = { client.GetBitValue(TAG_MOVE_HOME, -1, DataTimeout) }\n");
