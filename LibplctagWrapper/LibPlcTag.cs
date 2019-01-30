@@ -320,7 +320,7 @@ namespace LibplctagWrapper
                     }
                     else
                     {
-                        data8 = (byte)~(1 << index);
+                        data8 &= (byte)~(1 << index);
                     }
                     SetUint8Value(tag, 0, data8);
                     break;
