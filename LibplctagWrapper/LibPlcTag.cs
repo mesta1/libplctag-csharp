@@ -277,11 +277,11 @@ namespace LibplctagWrapper
                     UInt64 data64 = GetUint64Value(tag, 0);
                     if (value)
                     {
-                        data64 = data64 | (UInt64)Math.Pow(2, index);
+                        data64 |= (UInt64) 1 << index;
                     }
                     else
                     {
-                        data64 = data64 ^ (UInt64)Math.Pow(2, index);
+                        data64 &= ~((UInt64) 1 << index);
                     }
                     SetUint64Value(tag, 0, data64);
                     break;
@@ -290,11 +290,11 @@ namespace LibplctagWrapper
                     UInt32 data32 = GetUint32Value(tag, 0);
                     if (value)
                     {
-                        data32 = data32 | (UInt32)Math.Pow(2, index);
+                        data32 |= (UInt32) 1 << index;
                     }
                     else
                     {
-                        data32 = data32 ^ (UInt32)Math.Pow(2, index);
+                        data32 &= ~((UInt32) 1 << index);
                     }
                     SetUint32Value(tag, 0, data32);
                     break;
@@ -303,11 +303,11 @@ namespace LibplctagWrapper
                     UInt16 data16 = GetUint16Value(tag, 0);
                     if (value)
                     {
-                        data16 = (UInt16)(data16 | (UInt16)Math.Pow(2, index));
+                        data16 |= (UInt16)(1 << index);
                     }
                     else
                     {
-                        data16 = (UInt16)(data16 ^ (UInt16)Math.Pow(2, index));
+                        data16 &= (UInt16)~(1 << index);
                     }
                     SetUint16Value(tag, 0, data16);
                     break;
@@ -316,11 +316,11 @@ namespace LibplctagWrapper
                     byte data8 = GetUint8Value(tag, 0);
                     if (value)
                     {
-                        data8 = (byte)(data8 | (byte)Math.Pow(2, index));
+                        data8 |= (byte)(1 << index);
                     }
                     else
                     {
-                        data8 = (byte)(data8 ^ (byte)Math.Pow(2, index));
+                        data8 = (byte)~(1 << index);
                     }
                     SetUint8Value(tag, 0, data8);
                     break;
