@@ -181,7 +181,7 @@ namespace LgxSimple
             Console.WriteLine($"latest 'STATUS_WORD' = { client.GetUint32Value(TAG_STATUS_WORD, 0) }\n");
             Console.WriteLine($"latest 'PC_HEARTBEAT' = { client.GetUint8Value(TAG_PC_HEARTBEAT, 0) }\n");
             Console.WriteLine($"latest 'MOVE_HOME' = { client.GetBitValue(TAG_MOVE_HOME, -1, DataTimeout) }\n");
-            Console.WriteLine($"latest 'LINTY' = { client.GetUint8Value(TAG_LINTY, 0) }\n");
+            Console.WriteLine($"latest 'LINTY' = { client.GetUint64Value(TAG_LINTY, 0) }\n");
             Console.WriteLine($"latest 'CONTROL_WORD.2 (JOG_REV)' = { client.GetBitValue(TAG_CONTROL_WORD, 2, DataTimeout) }\n");
 
             Console.WriteLine("}}}}}}}}}}}}}}}}}}}}}\n");
