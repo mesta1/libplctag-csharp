@@ -1,4 +1,5 @@
-﻿using System;
+﻿using libplctag.NativeImport;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -16,38 +17,37 @@ namespace LibplctagWrapper
         public void AddTag(Tag tag)
         {
             /* use timeout of 0 for legacy support */
-            var ptr = plc_tag_create(tag.UniqueKey, 0);
+            var ptr = plctag.plc_tag_create(tag.UniqueKey, 0);
             _tags.Add(tag.UniqueKey, ptr);
         }
 
         public void AddTag(Tag tag, int timeout)
         {
-            var ptr = plc_tag_create(tag.UniqueKey, timeout);
+            var ptr = plctag.plc_tag_create(tag.UniqueKey, timeout);
             _tags.Add(tag.UniqueKey, ptr);
         }
 
         public int GetStatus(Tag tag)
         {
-            var status = plc_tag_status(_tags[tag.UniqueKey]);
+            var status = plctag.plc_tag_status(_tags[tag.UniqueKey]);
             return status;
         }
 
         public string DecodeError(int error)
         {
-            var ptr = plc_tag_decode_error(error);
-            return Marshal.PtrToStringAnsi(ptr);
+            return plctag.plc_tag_decode_error(error);
         }
 
         public void RemoveTag(Tag tag)
         {
-            plc_tag_destroy(_tags[tag.UniqueKey]);
+            plctag.plc_tag_destroy(_tags[tag.UniqueKey]);
             _tags.Remove(tag.UniqueKey);
         }
 
         public int ReadTag(Tag tag, int timeout)
         {
 #if true
-            var result = plc_tag_read(_tags[tag.UniqueKey], timeout);
+            var result = plctag.plc_tag_read(_tags[tag.UniqueKey], timeout);
             return result;
 #else
             if (_tags.Count != 0)
@@ -60,7 +60,7 @@ namespace LibplctagWrapper
 
         public int WriteTag(Tag tag, int timeout)
         {
-            var result = plc_tag_write(_tags[tag.UniqueKey], timeout);
+            var result = plctag.plc_tag_write(_tags[tag.UniqueKey], timeout);
             return result;
         }
 
@@ -68,86 +68,86 @@ namespace LibplctagWrapper
 
         public UInt64 GetUint64Value(Tag tag, int offset)
         {
-            return plc_tag_get_uint64(_tags[tag.UniqueKey], offset);
+            return plctag.plc_tag_get_uint64(_tags[tag.UniqueKey], offset);
         }
 
         public void SetUint64Value(Tag tag, int offset, UInt64 value)
         {
-            plc_tag_set_uint64(_tags[tag.UniqueKey], offset, value);
+            plctag.plc_tag_set_uint64(_tags[tag.UniqueKey], offset, value);
         }
 
         public Int64 GetInt64Value(Tag tag, int offset)
         {
-            return plc_tag_get_int64(_tags[tag.UniqueKey], offset);
+            return plctag.plc_tag_get_int64(_tags[tag.UniqueKey], offset);
         }
 
         public void SetInt64Value(Tag tag, int offset, Int64 value)
         {
-            plc_tag_set_int64(_tags[tag.UniqueKey], offset, value);
+            plctag.plc_tag_set_int64(_tags[tag.UniqueKey], offset, value);
         }
 
         public double GetFloat64Value(Tag tag, int offset)
         {
-            return plc_tag_get_float64(_tags[tag.UniqueKey], offset);
+            return plctag.plc_tag_get_float64(_tags[tag.UniqueKey], offset);
         }
 
         public void SetFloat64Value(Tag tag, int offset, double value)
         {
-            plc_tag_set_float64(_tags[tag.UniqueKey], offset, value);
+            plctag.plc_tag_set_float64(_tags[tag.UniqueKey], offset, value);
         }
 
         /* 32-bit types */
 
         public UInt32 GetUint32Value(Tag tag, int offset)
         {
-            return plc_tag_get_uint32(_tags[tag.UniqueKey], offset);
+            return plctag.plc_tag_get_uint32(_tags[tag.UniqueKey], offset);
         }
 
         public void SetUint32Value(Tag tag, int offset, UInt32 value)
         {
-            plc_tag_set_uint32(_tags[tag.UniqueKey], offset, value);
+            plctag.plc_tag_set_uint32(_tags[tag.UniqueKey], offset, value);
         }
 
         public Int32 GetInt32Value(Tag tag, int offset)
         {
-            return plc_tag_get_int32(_tags[tag.UniqueKey], offset);
+            return plctag.plc_tag_get_int32(_tags[tag.UniqueKey], offset);
         }
 
         public void SetInt32Value(Tag tag, int offset, Int32 value)
         {
-            plc_tag_set_int32(_tags[tag.UniqueKey], offset, value);
+            plctag.plc_tag_set_int32(_tags[tag.UniqueKey], offset, value);
         }
 
         public float GetFloat32Value(Tag tag, int offset)
         {
-            return plc_tag_get_float32(_tags[tag.UniqueKey], offset);
+            return plctag.plc_tag_get_float32(_tags[tag.UniqueKey], offset);
         }
 
         public void SetFloat32Value(Tag tag, int offset, float value)
         {
-            plc_tag_set_float32(_tags[tag.UniqueKey], offset, value);
+            plctag.plc_tag_set_float32(_tags[tag.UniqueKey], offset, value);
         }
 
         /* 16-bit types */
 
         public UInt16 GetUint16Value(Tag tag, int offset)
         {
-            return plc_tag_get_uint16(_tags[tag.UniqueKey], offset);
+            return plctag.plc_tag_get_uint16(_tags[tag.UniqueKey], offset);
         }
 
         public void SetUint16Value(Tag tag, int offset, UInt16 value)
         {
-            plc_tag_set_uint16(_tags[tag.UniqueKey], offset, value);
+            plctag.plc_tag_set_uint16(_tags[tag.UniqueKey], offset, value);
         }
 
         public Int16 GetInt16Value(Tag tag, int offset)
         {
-            return plc_tag_get_int16(_tags[tag.UniqueKey], offset);
+            return plctag.plc_tag_get_int16(_tags[tag.UniqueKey], offset);
         }
 
         public void SetInt16Value(Tag tag, int offset, Int16 value)
         {
-            plc_tag_set_int16(_tags[tag.UniqueKey], offset, value);
+            plctag.plc_tag_set_int16(_tags[tag.UniqueKey], offset, value);
         }
 
         /* 8-bit types */
@@ -155,7 +155,7 @@ namespace LibplctagWrapper
         public byte GetUint8Value(Tag tag, int offset)
         {
 #if true
-            return plc_tag_get_uint8(_tags[tag.UniqueKey], offset);
+            return plctag.plc_tag_get_uint8(_tags[tag.UniqueKey], offset);
 #else
             if (_tags.Count != 0)
             {
@@ -167,17 +167,17 @@ namespace LibplctagWrapper
 
         public void SetUint8Value(Tag tag, int offset, byte value)
         {
-            plc_tag_set_uint8(_tags[tag.UniqueKey], offset, value);
+            plctag.plc_tag_set_uint8(_tags[tag.UniqueKey], offset, value);
         }
 
         public sbyte GetInt8Value(Tag tag, int offset)
         {
-            return plc_tag_get_int8(_tags[tag.UniqueKey], offset);
+            return plctag.plc_tag_get_int8(_tags[tag.UniqueKey], offset);
         }
 
         public void SetInt8Value(Tag tag, int offset, sbyte value)
         {
-            plc_tag_set_int8(_tags[tag.UniqueKey], offset, value);
+            plctag.plc_tag_set_int8(_tags[tag.UniqueKey], offset, value);
         }
 
         /* bits */
@@ -349,99 +349,12 @@ namespace LibplctagWrapper
         {
             foreach (var tag in _tags)
             {
-                plc_tag_destroy(tag.Value);
+                plctag.plc_tag_destroy(tag.Value);
             }
             _tags.Clear();
         }
 
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_create", CallingConvention = CallingConvention.Cdecl)]
-        static extern Int32 plc_tag_create([MarshalAs(UnmanagedType.LPStr)] string lpString, int timeout);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_destroy", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_destroy(Int32 tag);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_status", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_status(Int32 tag);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_decode_error", CallingConvention = CallingConvention.Cdecl)]
-        static extern IntPtr plc_tag_decode_error(int error);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_read", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_read(Int32 tag, int timeout);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_write", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_write(Int32 tag, int timeout);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_get_size", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_get_size(Int32 tag);
-
-        /* 64-bit types */
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_get_uint64", CallingConvention = CallingConvention.Cdecl)]
-        static extern UInt64 plc_tag_get_uint64(Int32 tag, int offset);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_get_int64", CallingConvention = CallingConvention.Cdecl)]
-        static extern Int64 plc_tag_get_int64(Int32 tag, int offset);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_set_uint64", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_set_uint64(Int32 tag, int offset, UInt64 val);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_set_int64", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_set_int64(Int32 tag, int offset, Int64 val);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_get_float64", CallingConvention = CallingConvention.Cdecl)]
-        static extern double plc_tag_get_float64(Int32 tag, int offset);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_set_float64", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_set_float64(Int32 tag, int offset, double val);
-
-        /* 32-bit types */
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_get_uint32", CallingConvention = CallingConvention.Cdecl)]
-        static extern UInt32 plc_tag_get_uint32(Int32 tag, int offset);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_get_int32", CallingConvention = CallingConvention.Cdecl)]
-        static extern Int32 plc_tag_get_int32(Int32 tag, int offset);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_set_uint32", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_set_uint32(Int32 tag, int offset, UInt32 val);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_set_int32", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_set_int32(Int32 tag, int offset, Int32 val);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_get_float32", CallingConvention = CallingConvention.Cdecl)]
-        static extern float plc_tag_get_float32(Int32 tag, int offset);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_set_float32", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_set_float32(Int32 tag, int offset, float val);
-
-        /* 16-bit types */
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_get_uint16", CallingConvention = CallingConvention.Cdecl)]
-        static extern UInt16 plc_tag_get_uint16(Int32 tag, int offset);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_get_int16", CallingConvention = CallingConvention.Cdecl)]
-        static extern Int16 plc_tag_get_int16(Int32 tag, int offset);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_set_uint16", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_set_uint16(Int32 tag, int offset, UInt16 val);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_set_int16", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_set_int16(Int32 tag, int offset, Int16 val);
-
-        /* 8-bit types */
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_get_uint8", CallingConvention = CallingConvention.Cdecl)]
-        static extern byte plc_tag_get_uint8(Int32 tag, int offset);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_get_int8", CallingConvention = CallingConvention.Cdecl)]
-        static extern sbyte plc_tag_get_int8(Int32 tag, int offset);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_set_uint8", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_set_uint8(Int32 tag, int offset, byte val);
-
-        [DllImport("plctag.dll", EntryPoint = "plc_tag_set_int8", CallingConvention = CallingConvention.Cdecl)]
-        static extern int plc_tag_set_int8(Int32 tag, int offset, sbyte val);
+        
 
         /* library internal status. */
         public const int PLCTAG_STATUS_PENDING = 1; // Operation in progress. Not an error.
