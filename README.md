@@ -4,6 +4,10 @@ Contains the libplctag wrapper, the dll and some examples on how to communicate 
 
 Get Libplctag at https://github.com/kyle-github/libplctag
 
+### Deprecated
+
+While this project works, it is not actively maintained. It's better that you use the official C# wrapper at https://github.com/libplctag/libplctag.NET and get support at the official google group https://groups.google.com/g/libplctag.
+
 ### License: 
 This code is released under MIT license. The Libplctag dll is released under LGPL license.
 
