@@ -17,7 +17,7 @@ namespace LgxSimple
             var client = new Libplctag();
 
             const string PLC_IP = "192.168.10.10";
-            const string PLC_PATH = "1, 0";
+            const string PLC_PATH = "1,0";
             const CpuType PLC_TYPE = CpuType.LGX;
 
             var TAG_CONTROL_WORD = new Tag(PLC_IP, PLC_PATH, PLC_TYPE, "CONTROL_WORD", DataType.Int32, 1);
