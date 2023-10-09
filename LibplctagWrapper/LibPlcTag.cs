@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace LibplctagWrapper
 {
@@ -63,6 +64,28 @@ namespace LibplctagWrapper
             var result = plctag.plc_tag_write(_tags[tag.UniqueKey], timeout);
             return result;
         }
+
+        /* string types */
+
+        public string GetStringValue(Tag tag, int stringStartOffset, int bufferLength)
+        {
+            StringBuilder buffer = new StringBuilder(bufferLength);
+            int result = plctag.plc_tag_get_string(_tags[tag.UniqueKey], stringStartOffset, buffer, bufferLength);
+
+            if (result == 0)
+            {
+                return buffer.ToString();
+            }
+            else
+            {
+                return string.Empty; // Return an empty string in case of an error.
+            }
+        }
+        public void SetStringValue(Tag tag, int offset, string string_val)
+        {
+            plctag.plc_tag_set_string(_tags[tag.UniqueKey], offset, string_val);
+        }
+
 
         /* 64-bit types */
 
